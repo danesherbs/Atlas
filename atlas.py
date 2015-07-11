@@ -1,15 +1,16 @@
 import os
+import sys
 import time
 import logging
 import threading
 from tts import say
 import speech_recognition as sr
 
-
+# Print ATLAS
 ATLAS = open('ATLAS.txt','r')
 for line in ATLAS:
     print line,
-
+ATLAS.close()
 
 # Initialization
 r = sr.Recognizer()
@@ -34,7 +35,7 @@ def stop_music():
 
 # Speech to text
 def listen():
-    MAX_WAIT = 3  # seconds
+    MAX_WAIT = 5  # seconds
     logging.debug("Listening...")
     with sr.Microphone() as source:  # use the default microphone as the audio source
         try:
@@ -52,23 +53,23 @@ def listen():
         logging.debug("You said '%s'" % list[0]["text"])
     except LookupError:  # speech is unintelligible
         logging.debug("Oops! Didn't catch that")
-        return None
+        return False
 
     return list[0]["text"]
 
 
 # Listen for particular phrases
-def listen_for_phrases():
-    secs_inactive = 0
-    while(secs_inactive < 10):
-        start = time.clock()
+def listen_for_phrases(timeouts=0):
+    while(timeouts < 5):
 
         logging.debug("Waiting for phrases:")
         for phrase in phrases:
-            logging.debug("    %s" % phrase)
+            logging.debug("    '%s'" % phrase)
 
         # Listen for phrase
         user_said = listen()
+        if user_said is None:
+            timeouts += 1  # record timeout
 
         # PHRASE
         if user_said == "time to program":
@@ -83,17 +84,17 @@ def listen_for_phrases():
 
         # PHRASE
         elif user_said == "power off":
-            print("\n\
-                #####################\n\
-                #     power off              #\n\
-                #     A T L A S     #\n\
-                #                   #\n\
-                #####################\n\
-                ")
+            # Print ATLAS
+            bye = open('Goodbye.txt','r')
+            for line in bye:
+                print line,
+            bye.close()
             sys.exit(-1)
 
-        end = time.clock()
-        secs_inactive = (start-end)/1000
+        else:
+            continue
+
+        timeouts = 0  # reset timeouts if received response
 
 
 # Await 'Atlas' phrase
@@ -101,9 +102,9 @@ def await_commands():
     while(True):
         logging.debug("Waiting for keyword 'Atlas'...")
         if listen() == "Atlas":
-            # threading.Thread(name="say", args=["Yes sir?"], target=say).start()
+            # threading.Thread(name="say", args=["Yes?"], target=say).start()
             # time.sleep(2)
-            # say("Yes sir?")
+            # say("Yes?")
             listen_for_phrases()
 
 
