@@ -19,3 +19,8 @@ Stopping music:
 
 **Acknowledgements:**
 Atlas uses Google's speech recognition and text to speech APIs.
+
+
+## Installation
+
+    sudo pip install SpeechRecognition gTTS
