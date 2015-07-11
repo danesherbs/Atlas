@@ -86,7 +86,7 @@ def await_commands():
 
 
 if __name__ == "__main__":
-    listen_for_phrases()
+    await_commands()
     
 
 
