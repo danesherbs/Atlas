@@ -12,6 +12,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) {%(funcName)s} %(message)s',)
 say_t = threading.Thread(name='gTTS', target=say)
 
+
 # Play programming music
 def play_music():
     logging.debug("Starting mpg321")
@@ -22,7 +23,7 @@ def play_music():
 # Stop programming music
 def stop_music():
     logging.debug("Killing mpg321")
-    os.system("sudo killall mpg321")
+    os.system("killall mpg321")
     logging.debug("Killed mpg321")
 
 
@@ -52,7 +53,9 @@ def listen_for_phrases():
     while(secs_inactive < 10):
         start = time.clock()
 
-        logging.debug("Waiting for a phrase...")
+        logging.debug("Waiting for phrases:")
+        logging.debug("    'Time to program'")
+        logging.debug("    'Stop the music'")
         user_said = listen()
 
         # PHRASE 1
