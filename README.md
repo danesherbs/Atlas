@@ -3,7 +3,7 @@ Iron-Man-inspired voice controlled operating system.
 
 Running Atlas:
 
-    "sudo python atlas.py"
+    sudo python atlas.py
 
 Playing music:
 
