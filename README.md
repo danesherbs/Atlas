@@ -17,10 +17,13 @@ Stopping music:
     * wait for Atlas to respond *
     "Stop the music"
 
-**Acknowledgements:**
-Atlas uses Google's speech recognition and text to speech APIs.
+## Requirements
 
-
-## Installation
+Run the following:
 
     sudo pip install SpeechRecognition gTTS
+
+or visit:
+
+* [SpeechRecognition 1.5.0](pypi.python.org/pypi/SpeechRecognition/)
+* [gTTS 1.0.2](pypi.python.org/pypi/gTTS/1.0.2)
