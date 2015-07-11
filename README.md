@@ -17,5 +17,5 @@ Stopping music:
     * wait for Atlas to respond *
     "Stop the music"
 
-**Acknowledgements**:
+**Acknowledgements:**
 Atlas uses Google's speech recognition and text to speech APIs.
