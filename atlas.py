@@ -6,12 +6,17 @@ from tts import say
 import speech_recognition as sr
 
 
-# initialization
+ATLAS = open('ATLAS.txt','r')
+for line in ATLAS:
+    print line,
+
+
+# Initialization
 r = sr.Recognizer()
 logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) {%(funcName)s} %(message)s',)
 say_t = threading.Thread(name='gTTS', target=say)
-
+phrases = ["time to program", "stop the music", "power off"]
 
 # Play programming music
 def play_music():
@@ -29,12 +34,17 @@ def stop_music():
 
 # Speech to text
 def listen():
+    MAX_WAIT = 3  # seconds
     logging.debug("Listening...")
     with sr.Microphone() as source:  # use the default microphone as the audio source
-        audio = r.listen(source)  # listen for the first phrase and extract it into audio data
-    logging.debug("Got it! Now recognizing it...")
-
+        try:
+            audio = r.listen(source, MAX_WAIT)  # listen for the first phrase and extract it into audio data
+        except:  # TODO: catch TimeoutError, a type of OSError
+            logging.debug("Timeout exception")
+            return None
+        
     try:
+        logging.debug("Got it! Now recognizing it...")
         list = r.recognize(audio,True)  # generate a list of possible transcriptions
         logging.debug("Possible transcriptions:")
         for prediction in list:
@@ -54,20 +64,33 @@ def listen_for_phrases():
         start = time.clock()
 
         logging.debug("Waiting for phrases:")
-        logging.debug("    'Time to program'")
-        logging.debug("    'Stop the music'")
+        for phrase in phrases:
+            logging.debug("    %s" % phrase)
+
+        # Listen for phrase
         user_said = listen()
 
-        # PHRASE 1
+        # PHRASE
         if user_said == "time to program":
             # say("Let's kick some ass")
             threading.Thread(name='play_music', target=play_music).start()
             logging.debug("'play_music' thread issued")
         
-        # PHRASE 2
-        if user_said == "stop the music":
+        # PHRASE
+        elif user_said == "stop the music":
             threading.Thread(name='stop_music', target=stop_music).start()
             logging.debug("'stop_music' thread issued")
+
+        # PHRASE
+        elif user_said == "power off":
+            print("\n\
+                #####################\n\
+                #     power off              #\n\
+                #     A T L A S     #\n\
+                #                   #\n\
+                #####################\n\
+                ")
+            sys.exit(-1)
 
         end = time.clock()
         secs_inactive = (start-end)/1000
@@ -88,14 +111,13 @@ def await_commands():
 #          MAIN          #
 ##########################
 if __name__ == "__main__":
+    
     await_commands()
     
-
-
-###############################
-logging.debug("END OF PROGRAM")
-logging.shutdown()
-###############################
+    ###############################
+    logging.debug("END OF PROGRAM")
+    logging.shutdown()
+    ###############################
 
 
 
