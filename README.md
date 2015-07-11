@@ -3,7 +3,7 @@ Iron-Man-inspired voice controlled operating system.
 
 Running Atlas:
 
-    "sudo python atlas.py"
+    sudo python atlas.py
 
 Playing music:
 
@@ -17,5 +17,5 @@ Stopping music:
     * wait for Atlas to respond *
     "Stop the music"
 
-Acknowledgements:
+**Acknowledgements:**
 Atlas uses Google's speech recognition and text to speech APIs.
