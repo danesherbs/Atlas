@@ -1,5 +1,5 @@
 # Atlas
-Iron-Man-inspired voice controlled operating system.
+#### The Iron-Man-inspired voice controlled operating system
 
 Running Atlas:
 
