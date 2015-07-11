@@ -84,7 +84,9 @@ def await_commands():
             listen_for_phrases()
 
 
-
+##########################
+#          MAIN          #
+##########################
 if __name__ == "__main__":
     await_commands()
     
