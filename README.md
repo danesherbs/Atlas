@@ -3,7 +3,7 @@
 
 Running Atlas:
 
-    sudo python atlas.py
+    python atlas.py
 
 Playing music:
 
@@ -21,7 +21,7 @@ Stopping music:
 
 Run the following:
 
-    sudo pip install SpeechRecognition gTTS
+    pip install SpeechRecognition gTTS
 
 or visit:
 
