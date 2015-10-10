@@ -73,7 +73,6 @@ def listen_for_phrases(timeouts=0):
 
         # PHRASE
         if user_said == "time to program":
-            # say("Let's kick some ass")
             threading.Thread(name='play_music', target=play_music).start()
             logging.debug("'play_music' thread issued")
         
