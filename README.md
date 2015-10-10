@@ -23,6 +23,10 @@ Powering off:
     * wait for Atlas to respond *
     "Power off"
 
+## Screenshot
+
+![ATLAS](https://i.imgur.com/TZWadtI.png)
+
 ## Requirements
 
 Atlas relies on Google's speech recognition and TTS APIs:
